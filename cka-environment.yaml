@@ -1,0 +1,14 @@
+parameters:
+  root_password: linux
+  image: "4f029a40-4f4f-474d-ac7d-1cdbd1b017ae"
+  master_flavor: m1.xlarge
+  worker_flavor: m1.xlarge
+  worker_count: 2
+  external_net: floating
+  # Make sure you use a CIDR that doesn't conflict with the CaaSP IPs:
+  # https://github.com/kubic-project/salt/blob/master/pillar/params.sls#L51
+  # https://github.com/kubic-project/velum/blob/master/app/controllers/setup_controller.rb#L34
+  # If dns_nameserver is the same as CaaSPs dns_cluster_ip then the kube service
+  # hostnames won't be resolved.
+  internal_net_cidr: 10.168.0.0/24
+  dns_nameserver: 10.168.0.2
